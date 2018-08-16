@@ -72,7 +72,7 @@ namespace Minifutbol.User.Controllers
             {
                 return RedirectToAction("index");
             }
-            return RedirectToAction("details", new { id });
+            return RedirectToAction("index");
         }
 
         [HttpPost]

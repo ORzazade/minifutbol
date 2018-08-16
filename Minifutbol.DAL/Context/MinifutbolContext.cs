@@ -34,7 +34,7 @@ namespace Minifutbol.DAL.Context
             modelBuilder.Entity<Game>()
                 .HasRequired<Team>(e => e.HostTeam)
                 .WithMany()
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete();
             modelBuilder.Entity<Game>()
                .HasRequired<Team>(e => e.GuestTeam)
                .WithMany()
