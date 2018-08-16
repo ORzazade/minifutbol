@@ -1,6 +1,6 @@
 # minifutbol
-isleme addimlari:
-1. Lokal db elave edib web configden connection stringi deyisdirilir.
-2. Minifutbol.User proyektin run etdikden sonra "register" bolmesinden qeydiyyatdan kecilir.
-3. Qeydiyyatdan kecmis her hansisa userin db-den "UserClaims" cedvelindeki "ClaimValue" deyisdirilib "admin" edilir.
-4. Admin ilk once Komanda elave etmeli sonra hemin komandalara oyuncu ve oyun elave ede biler.
+İşləmə addımları:
+1. Lokal db əlavə edib web configdən connection stringi dəyişdirilir.
+2. Minifutbol.User proyektin run etdikdən sonra "register" bölməsindən qeydiyyatdan keçilir.
+3. Qeydiyyatdan keçmiş hər hansısa userin db-dən "UserClaims" cədvəlindəki "ClaimValue" dəyişdirilib "admin" edilir.
+4. Admin ilk öncə Komanda əlavə etməli sonra həmin komandalara oyunçu ve oyun əlavə edə bilər.
