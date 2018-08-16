@@ -170,6 +170,13 @@ namespace Minifutbol.BL.Logics
             var data = Uow.GetRepository<Team>().GetById(entity.Id);
             if (data != null)
             {
+
+                while (data.Users.Count()>0)
+                {
+                    data.Users.FirstOrDefault().TeamId = null;
+                    Uow.GetRepository<User>().Update(data.Users.FirstOrDefault());
+                }
+               
                 Uow.GetRepository<Team>().Remove(data);
             }
             else
