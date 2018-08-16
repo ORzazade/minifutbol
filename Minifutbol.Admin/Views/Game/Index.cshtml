@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Minifutbol.BL.Models.Game.GameViewModel>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Host Team")
+            </th>
+
+            <th>
+                @Html.DisplayName("Host Goals")
+            </th>
+            <th>
+                @Html.DisplayName("Guest Goals")
+            </th>
+            <th>
+                @Html.DisplayName("Guest Team")
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GameTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RefereeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HostTeam.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.HostTeamGoals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuestTeamGoals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuestTeam.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RefereeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Add Result", "Addresult", new { id = item.Id }) 
+                    
+                </td>
+            </tr>
+        }
+
+    </table>

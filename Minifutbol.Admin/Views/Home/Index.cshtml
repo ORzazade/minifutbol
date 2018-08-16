@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Minifutbol.BL.Models.ScoreBoard.ScoreBoardViewModel>
+
+@{
+    ViewBag.Title = "ScoreBoard";
+}
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Win)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Draw)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GamePiont)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Win)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Draw)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GamePiont)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,22 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Minifutbol/bin
+/Minifutbol/obj/Debug
+/Minifutbol.Admin/bin
+/Minifutbol.Admin/obj/Debug
+/Minifutbol.BL/bin/Debug
+/Minifutbol.BL/obj/Debug
+/Minifutbol.DAL/bin/Debug
+/Minifutbol.DAL/obj/Debug
+/Minifutbol.Player/bin
+/Minifutbol.Player/obj/Debug
+/Minifutbol.Tests/bin/Debug
+/Minifutbol.Tests/obj/Debug
+/Minifutbol.User/bin
+/Minifutbol.User/obj/Debug
+/Minifutbol.Utils/obj/Debug
+/Minifutbol.Utils/bin/Debug
+/packages
+/Utils/obj/Debug

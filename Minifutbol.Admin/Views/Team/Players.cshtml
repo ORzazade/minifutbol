@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Minifutbol.BL.Models.User.UserViewModel>
+
+@{
+    ViewBag.Title = "TeamMates";
+    var playerList = new SelectList(ViewBag.Players, "Id", "UserName").ToList();
+
+}
+
+<h2>TeamMates</h2>
+
+
+<form method="post">
+    <div>
+        @Html.DropDownList("userId", @playerList, new
+            {
+                @class = "form-control",
+                style = "margin: 1.5% ; float:left; width: 16%;",
+                @id = "masinNoServis"
+                //@onchange = "CallChangefunc(this.value)"
+            })
+        <input name="teamId" type="hidden" value="@ViewBag.TeamId" />
+        <button type="submit" style="margin: 1.5%; float: left;" class="btn btn-primary" formaction="@Url.Action("addplayer")"> Add player</button>
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNumber)
+        </th>
+       
+        <th>
+            @Html.DisplayName("Team")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Remove", "RemovePlayer", new { id = item.Id, teamId = item.TeamId })|
+                @Html.ActionLink("Edit", "updatePlayer", new { id = item.Id})
+
+            </td>
+        </tr>
+    }
+
+</table>
