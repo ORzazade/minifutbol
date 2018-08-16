@@ -22,9 +22,6 @@
         <th>
             @Html.DisplayNameFor(model => model.GamePiont)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -44,9 +41,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GamePiont)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
             </td>
         </tr>
     }

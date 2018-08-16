@@ -10,7 +10,7 @@ namespace Minifutbol.DAL.Context
     public partial class Point
     {
         public int Id { get; set; }
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
         public int GamePiont { get; set; }
         public int GameId { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;

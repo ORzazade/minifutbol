@@ -12,6 +12,5 @@ namespace Minifutbol.BL.Models.ScoreBoard
         public int Lose { get; set; }
         public int Draw { get; set; }
         public int GamePiont { get; set; }
-        public string Description { get; set; }
     }
 }

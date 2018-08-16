@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Minifutbol.User.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class TeamController : Controller
     {
         private TeamLogic _teamLogic;

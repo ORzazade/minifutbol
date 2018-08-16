@@ -31,7 +31,7 @@ namespace Minifutbol.User.Controllers
         public ActionResult Login(UserLoginModel parameters)
         {
             var opResult = _userLogic.ValidateUser(parameters.UserName, parameters.Password);
-            if (opResult.UserClaims.Any(s => s.ClaimValue.ToLower() == "Admin"))
+            if (!opResult.UserClaims.Any(s => s.ClaimValue.ToLower() == "admin"))
             {
                 return View();
             }
@@ -40,7 +40,7 @@ namespace Minifutbol.User.Controllers
             {
                 new Claim(ClaimTypes.Name, opResult.UserName),
                 new Claim("userId", opResult.Id.ToString()),
-                new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(opResult.UserClaims.Select(s=>s.ClaimValue).ToList()))
+                new Claim(ClaimTypes.Role, opResult.UserClaims.FirstOrDefault().ClaimValue)
             };
             var identity = new ClaimsIdentity(claims, "ApplicationCookie");
 
@@ -75,7 +75,7 @@ namespace Minifutbol.User.Controllers
                 {
                 new Claim(ClaimTypes.Name, opResult.UserName),
                 new Claim("userId", opResult.Id.ToString()),
-                new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(opResult.UserClaims.Select(s=>s.ClaimValue).ToList()))
+                new Claim(ClaimTypes.Role, opResult.UserClaims.FirstOrDefault().ClaimValue)
             };
                 var identity = new ClaimsIdentity(claims, "ApplicationCookie");
 
@@ -97,6 +97,9 @@ namespace Minifutbol.User.Controllers
             return RedirectToAction("Index", "home");
         }
 
+
+        [Authorize(Roles = "admin")]
+
         public ActionResult UserProfile()
         {
             var userid = Request.GetOwinContext().Authentication.User.GetUserId();
@@ -110,6 +113,7 @@ namespace Minifutbol.User.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult UserProfile(UserUpdateModel parameters)
         {
             var userid = Request.GetOwinContext().Authentication.User.GetUserId();

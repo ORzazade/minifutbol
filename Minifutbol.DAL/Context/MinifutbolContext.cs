@@ -31,6 +31,14 @@ namespace Minifutbol.DAL.Context
           .Property(e => e.Salt)
           .IsFixedLength();
 
-    }
+            modelBuilder.Entity<Game>()
+                .HasRequired<Team>(e => e.HostTeam)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Game>()
+               .HasRequired<Team>(e => e.GuestTeam)
+               .WithMany()
+               .WillCascadeOnDelete(false);
+        }
   }
 }

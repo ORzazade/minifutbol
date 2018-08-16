@@ -20,12 +20,13 @@ namespace Minifutbol.User.Controllers
         }
         public ActionResult Index()
         {
+            var at=_pointLogic.GetAll(new BL.Models.Core.Filter()).Output;
             var points = _pointLogic.GetAll(new BL.Models.Core.Filter()).Output.GroupBy(x => new
             {
-                x.Team
+                x.TeamId
             }).Select(s => new ScoreBoardViewModel
             {
-                TeamName = s.Key.Team.Name,
+                TeamName =s.FirstOrDefault(l=>l.TeamId==s.Key.TeamId).Team.Name,
                 Win = s.Where(a => a.GamePiont == (int)GameResultEnum.Win).Count(),
                 Lose = s.Where(a => a.GamePiont == (int)GameResultEnum.Lose).Count(),
                 Draw = s.Where(a => a.GamePiont == (int)GameResultEnum.Draw).Count(),

@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Minifutbol.User.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class TeamController : Controller
     {
         private TeamLogic _teamLogic;
@@ -72,21 +72,21 @@ namespace Minifutbol.User.Controllers
             {
                 return RedirectToAction("index");
             }
-            return RedirectToAction("details",new { id });
+            return RedirectToAction("details", new { id });
         }
 
         [HttpPost]
         public ActionResult AddPlayer(int teamId, int userId)
         {
-            _teamLogic.AddPlayer(userId,teamId);
+            _teamLogic.AddPlayer(userId, teamId);
 
             return RedirectToAction("players", new { id = teamId });
 
         }
         public ActionResult RemovePlayer(int id, int teamId)
         {
-            _teamLogic.ExitTeam(id);    
-            return RedirectToAction("players",new { id = teamId });
+            _teamLogic.ExitTeam(id);
+            return RedirectToAction("players", new { id = teamId });
         }
 
         public ActionResult UpdatePlayer(int id)
@@ -112,7 +112,7 @@ namespace Minifutbol.User.Controllers
         {
             var _userlogic = new UserLogic();
             @ViewBag.TeamId = id;
-            ViewBag.Players = _userlogic.GetAll(new BL.Models.Core.Filter()).Output.Where(s=>s.TeamId!=id).ToList();
+            ViewBag.Players = _userlogic.GetAll(new BL.Models.Core.Filter()).Output.Where(s => s.TeamId != id).ToList();
             var _userLogic = new UserLogic();
             var users = _userLogic.FindAll(new BL.Models.User.UserFindModel { TeamId = id });
             return View(users.Output);

@@ -31,16 +31,16 @@ namespace Minifutbol.User.Controllers
         public ActionResult Login(UserLoginModel parameters)
         {
             var opResult = _userLogic.ValidateUser(parameters.UserName, parameters.Password);
-            if (opResult.UserClaims.Any(s => s.ClaimValue.ToLower() != "user"))
+            if (!opResult.UserClaims.Any(s => s.ClaimValue.ToLower() == "user"))
             {
                 return View();
             }
-
+            var roles = JsonConvert.SerializeObject(opResult.UserClaims.Select(s => s.ClaimValue).ToArray());
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, opResult.UserName),
                 new Claim("userId", opResult.Id.ToString()),
-                new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(opResult.UserClaims.Select(s=>s.ClaimValue).ToList()))
+                new Claim(ClaimTypes.Role, opResult.UserClaims.FirstOrDefault().ClaimValue)
             };
             var identity = new ClaimsIdentity(claims, "ApplicationCookie");
 
@@ -66,7 +66,7 @@ namespace Minifutbol.User.Controllers
             if (addREsult.IsSuccess)
             {
                 var opResult = _userLogic.ValidateUser(parameters.UserName, parameters.Password);
-                if (opResult.UserClaims.Any(s => s.ClaimValue.ToLower() != "user"))
+                if (!opResult.UserClaims.Any(s => s.ClaimValue.ToLower() == "user"))
                 {
                     return View();
                 }
@@ -75,7 +75,7 @@ namespace Minifutbol.User.Controllers
                 {
                 new Claim(ClaimTypes.Name, opResult.UserName),
                 new Claim("userId", opResult.Id.ToString()),
-                new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(opResult.UserClaims.Select(s=>s.ClaimValue).ToList()))
+                new Claim(ClaimTypes.Role, opResult.UserClaims.FirstOrDefault().ClaimValue)
             };
                 var identity = new ClaimsIdentity(claims, "ApplicationCookie");
 
@@ -97,6 +97,7 @@ namespace Minifutbol.User.Controllers
             return RedirectToAction("Index", "home");
         }
 
+        [Authorize(Roles="user")]
         public ActionResult UserProfile()
         {
             var userid = Request.GetOwinContext().Authentication.User.GetUserId();
@@ -110,6 +111,7 @@ namespace Minifutbol.User.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles="user")]
         public ActionResult UserProfile(UserUpdateModel parameters)
         {
             var userid = Request.GetOwinContext().Authentication.User.GetUserId();

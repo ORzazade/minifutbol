@@ -25,6 +25,7 @@ namespace Minifutbol.Admin.Controllers
             return View(games);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             var _teamLogic = new TeamLogic();
@@ -33,6 +34,7 @@ namespace Minifutbol.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult Create(GameCreateModel parameters)
         {
             var _teamLogic = new TeamLogic();
@@ -45,6 +47,7 @@ namespace Minifutbol.Admin.Controllers
             return View(parameters);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult AddResult(int id)
         {
             var opResult = _gameLogic.GetById(id);
@@ -53,6 +56,7 @@ namespace Minifutbol.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult AddResult(GameResultCreateModel parameters)
         {
             var opResult = _gameLogic.UpdateResult(parameters);

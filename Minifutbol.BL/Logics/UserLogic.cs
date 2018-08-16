@@ -82,6 +82,11 @@ namespace Minifutbol.BL.Logics
 
             };
             data.Password = CHashing.Hash(entity.Password, data.Salt);
+            data.UserClaims.Add(new UserClaim
+            {
+                ClaimType = "role",
+                ClaimValue = "user"
+            });
             this.Uow.GetRepository<User>().Add(data, OtherEntities);
             this.Uow.SaveChanges();
             output.Output = Mapper.Map<User, UserViewModel>(data);
